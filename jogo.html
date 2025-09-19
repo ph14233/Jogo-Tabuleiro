@@ -1,1 +1,287 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Controle de Recursos</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+      padding: 20px;
+      text-align: center;
+    }
+    h1 {
+      margin-bottom: 20px;
+    }
+    .container {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .player {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      padding: 15px;
+      width: 250px;
+    }
+    .player h2 {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+    .player h3 {
+      color: #007bff;
+      font-size: 14px;
+      margin-top: -5px;
+      margin-bottom: 15px;
+    }
+    .stat {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #f8f8f8;
+      border-radius: 8px;
+      padding: 8px 12px;
+      margin-bottom: 10px;
+      font-size: 16px;
+      font-weight: bold;
+    }
+    .money { background: #fff3cd; }
+    .rep   { background: #e7f1ff; }
+    .rec   { background: #e8f5e9; }
+
+    .controls {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 15px;
+    }
+    input[type=number] {
+      width: 80px;
+      padding: 5px;
+      text-align: center;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    button {
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      padding: 4px 10px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .plus  { background: #ffcc00; }
+    .minus { background: #ff8800; color: white; }
+    .plus.rep, .minus.rep { background: #007bff; color: white; }
+    .plus.rec, .minus.rec { background: #28a745; color: white; }
+
+    /* Botão de reset */
+    .reset-btn {
+      background: #dc3545;
+      color: white;
+      font-size: 18px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      margin-top: 30px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Controle de Recursos</h1>
+  <div class="container">
+
+    <!-- Jogador 1 -->
+    <div class="player" id="player1">
+      <h2>Investidor tradicional</h2>
+      <h3></h3>
+
+      <div class="stat money">💰 Dinheiro: <span id="money1">1000</span></div>
+      <div class="controls">
+        <input type="number" id="inputMoney1" placeholder="Valor">
+        <div>
+          <button class="plus" onclick="changeInput('money1','inputMoney1', true)">+</button>
+          <button class="minus" onclick="changeInput('money1','inputMoney1', false)">-</button>
+        </div>
+      </div>
+
+      <div class="stat rep">⭐ Reputação: <span id="rep1">60</span></div>
+      <div class="controls">
+        <input type="number" id="inputRep1" placeholder="Valor">
+        <div>
+          <button class="plus rep" onclick="changeInput('rep1','inputRep1', true)">+</button>
+          <button class="minus rep" onclick="changeInput('rep1','inputRep1', false)">-</button>
+        </div>
+      </div>
+
+      <div class="stat rec">♻️ Reciclável: <span id="rec1">500</span></div>
+      <div class="controls">
+        <input type="number" id="inputRec1" placeholder="Valor">
+        <div>
+          <button class="plus rec" onclick="changeInput('rec1','inputRec1', true)">+</button>
+          <button class="minus rec" onclick="changeInput('rec1','inputRec1', false)">-</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Jogador 2 -->
+    <div class="player" id="player2">
+      <h2>Investidor de impacto</h2>
+      <h3></h3>
+
+      <div class="stat money">💰 Dinheiro: <span id="money2">1000</span></div>
+      <div class="controls">
+        <input type="number" id="inputMoney2" placeholder="Valor">
+        <div>
+          <button class="plus" onclick="changeInput('money2','inputMoney2', true)">+</button>
+          <button class="minus" onclick="changeInput('money2','inputMoney2', false)">-</button>
+        </div>
+      </div>
+
+      <div class="stat rep">⭐ Reputação: <span id="rep2">60</span></div>
+      <div class="controls">
+        <input type="number" id="inputRep2" placeholder="Valor">
+        <div>
+          <button class="plus rep" onclick="changeInput('rep2','inputRep2', true)">+</button>
+          <button class="minus rep" onclick="changeInput('rep2','inputRep2', false)">-</button>
+        </div>
+      </div>
+
+      <div class="stat rec">♻️ Reciclável: <span id="rec2">500</span></div>
+      <div class="controls">
+        <input type="number" id="inputRec2" placeholder="Valor">
+        <div>
+          <button class="plus rec" onclick="changeInput('rec2','inputRec2', true)">+</button>
+          <button class="minus rec" onclick="changeInput('rec2','inputRec2', false)">-</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Jogador 3 -->
+    <div class="player" id="player3">
+      <h2>Regulador ambiental</h2>
+      <h3></h3>
+
+      <div class="stat money">💰 Dinheiro: <span id="money3">1000</span></div>
+      <div class="controls">
+        <input type="number" id="inputMoney3" placeholder="Valor">
+        <div>
+          <button class="plus" onclick="changeInput('money3','inputMoney3', true)">+</button>
+          <button class="minus" onclick="changeInput('money3','inputMoney3', false)">-</button>
+        </div>
+      </div>
+
+      <div class="stat rep">⭐ Reputação: <span id="rep3">60</span></div>
+      <div class="controls">
+        <input type="number" id="inputRep3" placeholder="Valor">
+        <div>
+          <button class="plus rep" onclick="changeInput('rep3','inputRep3', true)">+</button>
+          <button class="minus rep" onclick="changeInput('rep3','inputRep3', false)">-</button>
+        </div>
+      </div>
+
+      <div class="stat rec">♻️ Reciclável: <span id="rec3">500</span></div>
+      <div class="controls">
+        <input type="number" id="inputRec3" placeholder="Valor">
+        <div>
+          <button class="plus rec" onclick="changeInput('rec3','inputRec3', true)">+</button>
+          <button class="minus rec" onclick="changeInput('rec3','inputRec3', false)">-</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Jogador 4 -->
+    <div class="player" id="player4">
+      <h2>Blogueirinho</h2>
+      <h3></h3>
+
+      <div class="stat money">💰 Dinheiro: <span id="money4">1000</span></div>
+      <div class="controls">
+        <input type="number" id="inputMoney4" placeholder="Valor">
+        <div>
+          <button class="plus" onclick="changeInput('money4','inputMoney4', true)">+</button>
+          <button class="minus" onclick="changeInput('money4','inputMoney4', false)">-</button>
+        </div>
+      </div>
+
+      <div class="stat rep">⭐ Reputação: <span id="rep4">60</span></div>
+      <div class="controls">
+        <input type="number" id="inputRep4" placeholder="Valor">
+        <div>
+          <button class="plus rep" onclick="changeInput('rep4','inputRep4', true)">+</button>
+          <button class="minus rep" onclick="changeInput('rep4','inputRep4', false)">-</button>
+        </div>
+      </div>
+
+      <div class="stat rec">♻️ Reciclável: <span id="rec4">500</span></div>
+      <div class="controls">
+        <input type="number" id="inputRec4" placeholder="Valor">
+        <div>
+          <button class="plus rec" onclick="changeInput('rec4','inputRec4', true)">+</button>
+          <button class="minus rec" onclick="changeInput('rec4','inputRec4', false)">-</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Botão de reset -->
+  <div>
+    <button class="reset-btn" onclick="resetValores()">🔄 Restaurar Valores Iniciais</button>
+  </div>
+
+  <script>
+    // Carregar valores do localStorage
+    window.onload = function() {
+      const spans = document.querySelectorAll("span[id]");
+      spans.forEach(span => {
+        let saved = localStorage.getItem(span.id);
+        if (saved !== null) {
+          span.innerText = saved;
+        }
+      });
+    }
+
+    // Atualizar valores e salvar no localStorage
+    function changeInput(spanId, inputId, somar) {
+      let span = document.getElementById(spanId);
+      let input = document.getElementById(inputId);
+      let current = parseInt(span.innerText);
+      let value = parseInt(input.value);
+      if (isNaN(value)) value = 0;
+      let updated = somar ? current + value : current - value;
+      span.innerText = updated;
+      localStorage.setItem(spanId, updated);
+      input.value = "";
+    }
+
+    // Função para resetar os valores iniciais
+    function resetValores() {
+      if (confirm("Tem certeza que deseja restaurar os valores iniciais?")) {
+        const iniciais = {
+          money: 1000,
+          rep: 60,
+          rec: 500
+        };
+
+        // percorre os 4 jogadores
+        for (let i = 1; i <= 4; i++) {
+          for (let key in iniciais) {
+            let spanId = key + i; // ex: money1, rep2, rec3
+            let valor = iniciais[key];
+            document.getElementById(spanId).innerText = valor;
+            localStorage.setItem(spanId, valor);
+          }
+        }
+      }
+    }
+  </script>
+
+</body>
+</html>
 
