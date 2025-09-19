@@ -75,6 +75,20 @@
     .minus { background: #ff8800; color: white; }
     .plus.rep, .minus.rep { background: #007bff; color: white; }
     .plus.rec, .minus.rec { background: #28a745; color: white; }
+
+    /* Botão de reset */
+    .reset-btn {
+      background: #dc3545;
+      color: white;
+      font-size: 18px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      margin-top: 30px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
   </style>
 </head>
 <body>
@@ -216,6 +230,11 @@
 
   </div>
 
+  <!-- Botão de reset -->
+  <div>
+    <button class="reset-btn" onclick="resetValores()">🔄 Restaurar Valores Iniciais</button>
+  </div>
+
   <script>
     // Carregar valores do localStorage
     window.onload = function() {
@@ -240,7 +259,29 @@
       localStorage.setItem(spanId, updated);
       input.value = "";
     }
+
+    // Função para resetar os valores iniciais
+    function resetValores() {
+      if (confirm("Tem certeza que deseja restaurar os valores iniciais?")) {
+        const iniciais = {
+          money: 1000,
+          rep: 60,
+          rec: 500
+        };
+
+        // percorre os 4 jogadores
+        for (let i = 1; i <= 4; i++) {
+          for (let key in iniciais) {
+            let spanId = key + i; // ex: money1, rep2, rec3
+            let valor = iniciais[key];
+            document.getElementById(spanId).innerText = valor;
+            localStorage.setItem(spanId, valor);
+          }
+        }
+      }
+    }
   </script>
 
 </body>
 </html>
+
