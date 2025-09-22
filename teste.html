@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Controle de Recursos - Jogo de Tabuleiro</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      padding: 20px;
+      text-align: center;
+    }
+    h1 {
+      margin-bottom: 20px;
+    }
+    .player {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      padding: 15px;
+      margin: 15px auto;
+      width: 340px;
+    }
+    .stat {
+      margin: 10px 0;
+      font-size: 18px;
+    }
+    .btns {
+      margin-bottom: 10px;
+    }
+    input[type=number] {
+      width: 140px;      
+      padding: 5px;
+      font-size: 16px;
+      margin-bottom: 5px;
+      text-align: center;
+    }
+    button {
+      margin: 3px;
+      padding: 5px 10px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .money { background: #ffd966; }
+    .rep { background: #cfe2ff; }
+    .rec { background: #d9ead3; }
+    .history {
+      text-align: left;
+      margin-top: 10px;
+      font-size: 14px;
+      max-height: 120px;
+      overflow-y: auto;
+      border-top: 1px solid #ddd;
+      padding-top: 5px;
+    }
+    .history-entry {
+      margin: 2px 0;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Controle de Recursos</h1>
+
+  <!-- Jogador 1 -->
+  <div class="player" id="player1">
+    <h2>Jogador 1</h2>
+    <div class="stat">💰 Dinheiro: <span id="money1">1000</span></div>
+    <input type="number" id="inputMoney1" placeholder="Digite um valor">
+    <div class="btns">
+      <button class="money" onclick="changeInput('money1','inputMoney1', true, 'Jogador 1', 'Dinheiro')">Somar</button>
+      <button class="money" onclick="changeInput('money1','inputMoney1', false, 'Jogador 1', 'Dinheiro')">Subtrair</button>
+    </div>
+    <div class="stat">⭐ Reputação: <span id="rep1">60</span></div>
+    <input type="number" id="inputRep1" placeholder="Digite um valor">
+    <div class="btns">
+      <button class="rep" onclick="changeInput('rep1','inputRep1', true, 'Jogador 1', 'Reputação')">Somar</button>
+      <button class="rep" onclick="changeInput('rep1','inputRep1', false, 'Jogador 1', 'Reputação')">Subtrair</button>
+    </div>
+    <div class="stat">♻️ Reciclável: <span id="rec1">500</span></div>
+    <input type="number" id="inputRec1" placeholder="Digite um valor">
+    <div class="btns">
+      <button class="rec" onclick="changeInput('rec1','inputRec1', true, 'Jogador 1', 'Reciclável')">Somar</button>
+      <button class="rec" onclick="changeInput('rec1','inputRec1', false, 'Jogador 1', 'Reciclável')">Subtrair</button>
+    </div>
+    <div class="history" id="history1"></div>
+  </div>
+
+  <!-- Jogador 2 -->
+  <div class="player" id="player2">
+    <h2>Jogador 2</h2>
+    <div class="stat">💰 Dinheiro: <span id="money2">1000</span></div>
+    <input type="number" id="inputMoney2" placeholder="Digite um valor">
+    <div class="btns">
+      <button class="money" onclick="changeInput('money2','inputMoney2', true, 'Jogador 2', 'Dinheiro')">Somar</button>
+      <button class="money" onclick="changeInput('money2','inputMoney2', false, 'Jogador 2', 'Dinheiro')">Subtrair</button>
+    </div>
+    <div class="stat">⭐ Reputação: <span id="rep2">60</span></div>
+    <input type="number" id="inputRep2" placeholder="Digite um valor">
+    <div class="btns">
+      <button class="rep" onclick="changeInput('rep2','inputRep2', true, 'Jogador 2', 'Reputação')">Somar</button>
+      <button class="rep" onclick="changeInput('rep2','inputRep2', false, 'Jogador 2', 'Reputação')">Subtrair</button>
+    </div>
+    <div class="stat">♻️ Reciclável: <span id="rec2">500</span></div>
+    <input type="number" id="inputRec2" placeholder="Digite um valor">
+    <div class="btns">
+      <button class="rec" onclick="changeInput('rec2','inputRec2', true, 'Jogador 2', 'Reciclável')">Somar</button>
+      <button class="rec" onclick="changeInput('rec2','inputRec2', false, 'Jogador 2', 'Reciclável')">Subtrair</button>
+    </div>
+    <div class="history" id="history2"></div>
+  </div>
+
+  <!-- Jogador 3 -->
+  <div class="player" id="player3">
+    <h2>Jogador 3</h2>
+    <div class="stat">💰 Dinheiro: <span id="money3">1000</span></div>
+    <input type="number" id="inputMoney3" placeholder="Digite um valor">
+    <div class="btns">
+      <button class="money" onclick="changeInput('money3','inputMoney3', true, 'Jogador 3', 'Dinheiro')">Somar</button>
+      <button class="money" onclick="changeInput('money3','inputMoney3', false, 'Jogador 3', 'Dinheiro')">Subtrair</button>
+    </div>
+    <div class="stat">⭐ Reputação: <span id="rep3">60</span></div>
+    <input type="number" id="inputRep3" placeholder="Digite um valor">
+    <div class="btns">
+      <button class="rep" onclick="changeInput('rep3','inputRep3', true, 'Jogador 3', 'Reputação')">Somar</button>
+      <button class="rep" onclick="changeInput('rep3','inputRep3', false, 'Jogador 3', 'Reputação')">Subtrair</button>
+    </div>
+    <div class="stat">♻️ Reciclável: <span id="rec3">500</span></div>
+    <input type="number" id="inputRec3" placeholder="Digite um valor">
+    <div class="btns">
+      <button class="rec" onclick="changeInput('rec3','inputRec3', true, 'Jogador 3', 'Reciclável')">Somar</button>
+      <button class="rec" onclick="changeInput('rec3','inputRec3', false, 'Jogador 3', 'Reciclável')">Subtrair</button>
+    </div>
+    <div class="history" id="history3"></div>
+  </div>
+
+  <!-- Jogador 4 -->
+  <div class="player" id="player4">
+    <h2>Jogador 4</h2>
+    <div class="stat">💰 Dinheiro: <span id="money4">1000</span></div>
+    <input type="number" id="inputMoney4" placeholder="Digite um valor">
+    <div class="btns">
+      <button class="money" onclick="changeInput('money4','inputMoney4', true, 'Jogador 4', 'Dinheiro')">Somar</button>
+      <button class="money" onclick="changeInput('money4','inputMoney4', false, 'Jogador 4', 'Dinheiro')">Subtrair</button>
+    </div>
+    <div class="stat">⭐ Reputação: <span id="rep4">60</span></div>
+    <input type="number" id="inputRep4" placeholder="Digite um valor">
+    <div class="btns">
+      <button class="rep" onclick="changeInput('rep4','inputRep4', true, 'Jogador 4', 'Reputação')">Somar</button>
+      <button class="rep" onclick="changeInput('rep4','inputRep4', false, 'Jogador 4', 'Reputação')">Subtrair</button>
+    </div>
+    <div class="stat">♻️ Reciclável: <span id="rec4">500</span></div>
+    <input type="number" id="inputRec4" placeholder="Digite um valor">
+    <div class="btns">
+      <button class="rec" onclick="changeInput('rec4','inputRec4', true, 'Jogador 4', 'Reciclável')">Somar</button>
+      <button class="rec" onclick="changeInput('rec4','inputRec4', false, 'Jogador 4', 'Reciclável')">Subtrair</button>
+    </div>
+    <div class="history" id="history4"></div>
+  </div>
+
+  <script>
+    // Carrega valores salvos do localStorage
+    window.onload = function() {
+      const spans = document.querySelectorAll("span[id]");
+      spans.forEach(span => {
+        let saved = localStorage.getItem(span.id);
+        if (saved !== null) {
+          span.innerText = saved;
+        }
+      });
+
+      // Carrega históricos salvos
+      for (let i = 1; i <= 4; i++) {
+        let savedHistory = localStorage.getItem("history" + i);
+        if (savedHistory) {
+          document.getElementById("history" + i).innerHTML = savedHistory;
+        }
+      }
+    }
+
+    // Atualiza valores a partir do input e salva no localStorage
+    function changeInput(spanId, inputId, somar, jogador, recurso) {
+      let span = document.getElementById(spanId);
+      let input = document.getElementById(inputId);
+      let current = parseInt(span.innerText);
+      let value = parseInt(input.value);
+      if (isNaN(value)) value = 0;
+      let updated = somar ? current + value : current - value;
+      span.innerText = updated;
+      localStorage.setItem(spanId, updated);
+      input.value = ""; // limpa o campo após usar
+
+      // Registrar histórico
+      let action = somar ? "➕" : "➖";
+      let entry = `<div class='history-entry'>${new Date().toLocaleTimeString()} - ${action} ${recurso}: ${value} → Total: ${updated}</div>`;
+      let historyDiv = document.getElementById("history" + spanId.match(/\d/)[0]);
+      historyDiv.innerHTML = entry + historyDiv.innerHTML; // adiciona no topo
+      localStorage.setItem("history" + spanId.match(/\d/)[0], historyDiv.innerHTML);
+    }
+  </script>
+
+</body>
+</html>
